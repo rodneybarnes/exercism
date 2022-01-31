@@ -31,3 +31,12 @@ fn percent_failed(speed: u8) -> f64 {
     }
 }
 
+fn most_starred(speed: u8) -> f64 {
+    221.0 * (speed as f64) * match speed {
+        0 => 0.0,
+        1..=4 => 1.0,
+        5..=8 => 0.9,
+        9..=u8::MAX => 0.77,
+    }
+}
+
