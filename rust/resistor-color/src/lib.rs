@@ -18,19 +18,19 @@ pub enum ResistorColor {
 
 
 pub fn color_to_value(_color: ResistorColor) -> usize {
-    _color.int_value()
+    _color as usize
 }
 
 pub fn value_to_color_string(value: usize) -> String {
-    match ResistorColor::into_enum_iter().find(|e| e.int_value() == value) {
-        Some(rc) => format!("{:?}", rc),
-        None => "value out of range".to_string()
+    match ResistorColor::from_int(value) {
+        Ok(resistor) => format!("{:?}", resistor),
+        Err(_) => "value out of range".to_string()
     }
 }
 
 pub fn colors() -> Vec<ResistorColor> {
-    let mut rcArray = ResistorColor::into_enum_iter().collect::<Vec<ResistorColor>>();
-    rcArray.sort_by(|a, b| a.int_value().cmp(&b.int_value()));
+    let mut rc_array = ResistorColor::into_enum_iter().collect::<Vec<ResistorColor>>();
+    rc_array.sort_by(|a, b| a.int_value().cmp(&b.int_value()));
 
-    return rcArray
+    return rc_array
 }
